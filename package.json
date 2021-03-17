@@ -1,0 +1,53 @@
+{
+  "name": "openforker",
+  "version": "0.0.1",
+  "description": "CLI / API helping developers view, chose and fork an open-source repo",
+  "main": "./index.js",
+  "bin": {
+    "forker": "./bin/index.js"
+  },
+  "engines": {
+    "node": ">=12.18.0"
+  },
+  "scripts": {
+    "eslint": "eslint bin src test",
+    "eslint:fix": "npm run eslint -- --fix",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "prepublishOnly": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoine-coulon/openforker.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "CLI",
+    "API",
+    "fork",
+    "opensource"
+  ],
+  "author": "Antoine Coulon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antoine-coulon/openforker/issues"
+  },
+  "homepage": "https://github.com/antoine-coulon/openforker#readme",
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "commander": "^7.1.0",
+    "figlet": "^1.5.0",
+    "inquirer": "^8.0.0",
+    "kleur": "^4.1.4",
+    "sade": "^1.7.4"
+  }
+}
