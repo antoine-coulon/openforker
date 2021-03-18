@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 const express = require('express');
+const { grey } = require('kleur');
 const { join } = require('path');
 
 const PUBLIC = join(__dirname, '..', 'dist');
@@ -13,15 +15,8 @@ function bindServer(eventEmitter, callback) {
     res.sendFile(join(TEMPLATE, '/index.html'));
   });
 
-  app.post('/', (req, res) => {
-    console.log(req.headers);
-    return res.json();
-  });
-
   app.get('/callback', (req, res) => {
     const { error, code, state } = req.query;
-
-    console.log(code, state);
 
     if (error) {
       eventEmitter.emit('aborted', code, state);
@@ -36,7 +31,15 @@ function bindServer(eventEmitter, callback) {
     return res.status(500).end();
   });
 
-  app.listen(4243);
+  const server = app.listen(4243, () => {
+    console.log(grey('Server up!'));
+    eventEmitter.on('endAuthProcess', () => {
+      setImmediate(() => {
+        server.close();
+        console.log(grey('Server shutdown...'));
+      });
+    });
+  });
 
   callback();
 }
