@@ -15,7 +15,8 @@
     "build": "node ./esbuild.config.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "prepublishOnly": "npm run test"
+    "prepublishOnly": "npm run test",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",

@@ -2,9 +2,10 @@
 /* eslint-disable no-console */
 const { EventEmitter } = require('events').EventEmitter;
 const browser = require('openurl');
-const { greenBright, redBright } = require('kleur');
+const { redBright } = require('chalk');
 
 const { bindServer } = require('./httpServer');
+// eslint-disable-next-line no-unused-vars
 const { getAccessToken } = require('./httpClient');
 const { SERVER_URL } = require('./constants');
 
@@ -22,7 +23,6 @@ async function authenticate() {
 
     const authProcess = () => new Promise((resolve, reject) => {
       authEmitter.on('authenticated', (code, state) => {
-        console.log(greenBright(`authenticated : ${code}, ${state}`));
         resolve({ code, state });
       });
 
@@ -33,11 +33,12 @@ async function authenticate() {
     });
 
     const codeCredentials = await authProcess();
+    authEmitter.emit('endAuthProcess');
 
-    const { access_token } = await getAccessToken(codeCredentials);
+    const token = await getAccessToken(codeCredentials);
 
     return {
-      token: access_token,
+      token,
     };
   }
 
