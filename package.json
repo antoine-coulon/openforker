@@ -1,6 +1,6 @@
 {
   "name": "openforker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "CLI / API helping developers view, chose and fork an open-source repo",
   "main": "./index.js",
   "bin": {
@@ -18,6 +18,12 @@
     "prepublishOnly": "npm run test",
     "postinstall": "npm run build"
   },
+  "files": [
+    "bin",
+    "dist",
+    "src", 
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antoine-coulon/openforker.git"

@@ -33,7 +33,6 @@ function bindServer(eventEmitter, callback) {
   });
 
   const server = app.listen(4243, () => {
-    console.log(grey('Server up!'));
     eventEmitter.on('endAuthProcess', () => {
       setImmediate(() => {
         server.close();

@@ -24,7 +24,6 @@ async function retrieveStoredToken() {
   if (storedToken) {
     return storedToken;
   }
-
   try {
     await access(envConfigFilePath, constants.F_OK | constants.R_OK);
     const config = await readFile(envConfigFilePath, 'utf-8');

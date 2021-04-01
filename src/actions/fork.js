@@ -12,7 +12,7 @@ const browser = require('openurl');
 const { authenticate } = require('../auth/auth');
 const httpClient = require('../http/httpClient');
 const ForkProcessFailed = require('../errors/forkProcessFailed');
-const runCommand = require('../util/command');
+const EmptyRepositories = require('../errors/emptyRepositories');
 const {
   cliDefaultFont, cliSuccessFont, divWrapper, cliErrorFont,
 } = require('../util/ui');
@@ -20,7 +20,10 @@ const {
 const cloneRepository = require('./clone');
 const findRepository = require('./findRepository');
 
-async function forkOne({ owner, repositoryName }, options) {
+const FORK_CHECKOUT_TIMEOUT = 10000;
+const FORK_CHECKOUT_INTERVAL = 2500;
+
+async function forkOne({ owner, repositoryName }, options = { clone: false, open: false }) {
   try {
     const { token } = await authenticate();
 
@@ -38,6 +41,15 @@ async function forkOne({ owner, repositoryName }, options) {
 
 async function forkMultiple(repositories) {
   try {
+    if (repositories.length === 0) {
+      throw new EmptyRepositories();
+    }
+
+    if (repositories.length === 1) {
+      await forkOne(repositories[1]);
+      return;
+    }
+
     const { token } = await authenticate();
 
     const userDetails = await httpClient.getUserProfile(token);
@@ -53,7 +65,7 @@ async function forkMultiple(repositories) {
 
     forkMultipleResults.forEach((result) => {
       if (result.status === 'fulfilled') {
-        divWrapper(cliSuccessFont(`1 fork completed : ${result.value}`));
+        divWrapper(cliSuccessFont(`1 fork completed : [${result.value.name}]`));
       } else {
         divWrapper(cliErrorFont(`1 fork failed : ${result.reason}`));
       }
@@ -81,18 +93,16 @@ function startFork({
           resolve(repository);
         })
         .catch(() => {});
-    }, 2500);
+    }, FORK_CHECKOUT_INTERVAL);
 
     setTimeout(() => {
       clearInterval(interval);
       reject(new ForkProcessFailed(repositoryName));
-    }, 10000);
+    }, FORK_CHECKOUT_TIMEOUT);
   });
 }
 
-async function continueActionsWithForkedRepository(
-  repository, options = { clone: false, open: false },
-) {
+async function continueActionsWithForkedRepository(repository, options) {
   const { clone, open } = options;
 
   divWrapper(`${cliDefaultFont('Successfully created fork : ')} ${cliSuccessFont(repository.html_url)}`);

@@ -3,6 +3,11 @@ const trending = require('trending-github');
 const { forkMultiple } = require('./fork');
 
 async function exploreTrends(options) {
+  const repos = await exploreRepositories(options);
+  await selectRepositoriesToFork(repos);
+}
+
+async function exploreRepositories(options) {
   const { language, period } = options;
 
   const questions = [];
@@ -21,8 +26,8 @@ async function exploreTrends(options) {
       {
         type: 'list',
         name: 'period',
-        message: 'Trends period either "today", "week", "month"',
-        default: 'week',
+        message: 'Trends period',
+        choices: ['today', 'week', 'month'],
       },
     );
   }
@@ -46,7 +51,7 @@ async function exploreTrends(options) {
     repos = repos.concat(await trending(finalOptions.period));
   }
 
-  await selectRepositoriesToFork(repos);
+  return repos;
 }
 
 async function selectRepositoriesToFork(repos) {
