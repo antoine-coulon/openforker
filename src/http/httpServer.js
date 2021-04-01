@@ -3,8 +3,8 @@ const express = require('express');
 const { grey } = require('kleur');
 const { join } = require('path');
 
-const PUBLIC = join(__dirname, '..', 'dist');
-const TEMPLATE = join(__dirname, '..', 'template');
+const PUBLIC = join(__dirname, '..', '..', 'dist');
+const TEMPLATE = join(__dirname, '..', '..', 'template');
 
 function bindServer(eventEmitter, callback) {
   const app = express();
@@ -28,11 +28,11 @@ function bindServer(eventEmitter, callback) {
       return res.status(200).json('auth, you can close');
     }
 
+    eventEmitter.emit('aborted');
     return res.status(500).end();
   });
 
   const server = app.listen(4243, () => {
-    console.log(grey('Server up!'));
     eventEmitter.on('endAuthProcess', () => {
       setImmediate(() => {
         server.close();

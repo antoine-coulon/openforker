@@ -1,6 +1,6 @@
 {
   "name": "openforker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "CLI / API helping developers view, chose and fork an open-source repo",
   "main": "./index.js",
   "bin": {
@@ -18,6 +18,12 @@
     "prepublishOnly": "npm run test",
     "postinstall": "npm run build"
   },
+  "files": [
+    "bin",
+    "dist",
+    "src",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antoine-coulon/openforker.git"
@@ -46,18 +52,18 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.6",
-    "esbuild": "^0.9.3",
     "chalk": "^4.1.0",
-    "clear": "^0.1.0",
+    "cliui": "^7.0.4",
     "commander": "^7.1.0",
+    "env-paths": "^2.2.1",
+    "esbuild": "^0.9.3",
     "express": "^4.17.1",
-    "figlet": "^1.5.0",
-    "git-user-name": "^2.0.0",
     "got": "^11.8.2",
     "inquirer": "^8.0.0",
     "kleur": "^4.1.4",
-    "nodegit": "^0.27.0",
+    "make-promises-safe": "^5.1.0",
     "openurl": "^1.1.1",
-    "sade": "^1.7.4"
+    "sade": "^1.7.4",
+    "trending-github": "^2.0.7"
   }
 }

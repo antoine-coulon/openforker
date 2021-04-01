@@ -3,7 +3,8 @@ module.exports = {
     './jest.setup.js',
   ],
   collectCoverageFrom: [
-    '**/src/**/*.js',
+    '**/src/actions/*.js',
+    '**/src/auth/*.js',
   ],
   testEnvironment: 'node',
   testMatch: [
