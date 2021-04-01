@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const express = require('express');
-const { grey } = require('kleur');
 const { join } = require('path');
 
 const PUBLIC = join(__dirname, '..', '..', 'dist');
@@ -36,7 +35,6 @@ function bindServer(eventEmitter, callback) {
     eventEmitter.on('endAuthProcess', () => {
       setImmediate(() => {
         server.close();
-        console.log(grey('Server shutdown...'));
       });
     });
   });
