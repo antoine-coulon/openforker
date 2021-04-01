@@ -16,5 +16,5 @@ const configureClient = async () => {
 window.onload = async () => {
   await configureClient();
   // await auth0.loginWithRedirect();
-  window.location.replace('https://github.com/login/oauth/authorize?client_id=b21103718c308abe6916&allow_signup=true&state=sdf532q4sdf65qsdfqs5df4qsd');
+  window.location.replace('https://github.com/login/oauth/authorize?client_id=b21103718c308abe6916&allow_signup=true&state=sdf532q4sdf65qsdfqs5df4qsd&scope=repo');
 };

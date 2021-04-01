@@ -1,7 +1,7 @@
-const { fork } = require('../src/fork');
-const authModule = require('../src/auth');
+const { fork } = require('../src/actions/fork');
+const authModule = require('../src/auth/auth');
 
-const server = require('../src/httpServer');
+const server = require('../src/http/httpServer');
 
 describe('Fork task', () => {
   beforeEach(() => {
