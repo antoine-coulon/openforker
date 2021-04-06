@@ -1,6 +1,6 @@
 {
   "name": "openforker",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "CLI / API helping developers view, chose and fork a GitHub open-source repositories",
   "main": "./index.js",
   "bin": {
