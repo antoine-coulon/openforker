@@ -14,7 +14,7 @@
     "eslint": "eslint bin src test",
     "eslint:fix": "npm run eslint -- --fix",
     "build": "node ./esbuild.config.js",
-    "test": "jest",
+    "test": "jest --silent",
     "test:watch": "jest --watchAll",
     "prepublishOnly": "npm run test"
   },

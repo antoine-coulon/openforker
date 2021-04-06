@@ -1,13 +1,14 @@
 const fork = require('../../src/actions/fork');
 const authModule = require('../../src/auth/auth');
-
 const server = require('../../src/http/httpServer');
 
 describe('Fork task', () => {
   beforeEach(() => {
     server.bindServer = jest.fn().mockImplementation((cb) => setTimeout(cb));
-    fork.forkMultiple = jest.fn().mockImplementation(() => {});
     fork.forkOne = jest.fn().mockImplementation(() => {});
+    fork.forkMultiple = jest.fn().mockImplementation(async (repositories) => {
+      if (repositories.length === 1) { fork.forkOne(repositories[0]); }
+    });
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -21,11 +22,18 @@ describe('Fork task', () => {
     await (() => expect(authModuleSpy).toBeCalled());
   });
 
-  it('should start the fork because user is auth', async () => {
-    authModule.authenticate = jest.fn().mockResolvedValue(
-      {
-        login: 'anonymous1', id: '4542s',
-      },
-    );
+  it('should not start the fork multiple because no repositories were supplied', async () => {
+    expect(await fork.forkMultiple([])).toEqual(undefined);
+  });
+
+  it('should not start the fork multiple but fallback to fork one because only one repo was supplied', async () => {
+    const forkOneSpy = jest.spyOn(fork, 'forkOne');
+
+    const repositoryFixture = {
+      owner: 'bitcoin',
+      repositoryName: 'bitcoin',
+    };
+    await fork.forkMultiple([repositoryFixture]);
+    await expect(forkOneSpy).toBeCalled();
   });
 });
