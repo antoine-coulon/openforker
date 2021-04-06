@@ -7,7 +7,7 @@ require('make-promises-safe');
 
 const { version } = require('../package.json');
 const { forkOne } = require('../src/actions/fork');
-const { cliDefaultFont, divWrapper } = require('../src/util/ui');
+const { cliDefaultFont, divWrapper, cliErrorFont } = require('../src/util/ui');
 const exploreTrends = require('../src/actions/trends');
 
 const program = sade('forker').version(version);
@@ -22,13 +22,14 @@ program
   .action(trendsTask);
 
 program
-  .command('use <owner> <repositoryName>')
+  .command('use <repositoryInformation>')
   .describe('Fork a public GitHub repository by owner & repository name')
   .option('-c, --clone', 'Automatically clone the remote fork', false)
   .option('-o, --open', 'Automatically open forked repository', false)
   .action(forkTask);
 
-async function forkTask(owner, repositoryName, options) {
+async function forkTask(repositoryInformation, options) {
+  const [owner, repositoryName] = repositoryInformation.split('/');
   await forkOne({ owner, repositoryName }, options);
 }
 

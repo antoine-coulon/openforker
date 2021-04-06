@@ -23,18 +23,18 @@
 To use OpenForker as a CLI :
 
 ```console
-dev@opensource:~$ npm install openforker -g 
+$ npm install openforker -g 
 ```
 
 * explore GitHub trends by language and filter them by period
 ```console
-dev@opensource:~$ forker trends --language --period
+$ forker trends --language --period
 ```
 
 * directly fork a repository by knowing author & repository name, then clones it locally and open a browser tab
 on the forked repository
 ```console
-dev@opensource:~$ forker use discordjs discord.js --clone
+$ forker use discordjs discord.js --clone
 ```
 
 ### API Mode
@@ -42,7 +42,7 @@ dev@opensource:~$ forker use discordjs discord.js --clone
 To use OpenForker as an API :
 
 ```console
-dev@opensource:~$ npm install openforker
+$ npm install openforker
 ```
 
 ```js

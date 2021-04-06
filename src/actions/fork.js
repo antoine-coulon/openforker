@@ -19,12 +19,17 @@ const {
 
 const cloneRepository = require('./clone');
 const findRepository = require('./findRepository');
+const WrongRepositoryInformation = require('../errors/wrongRepositoryInformation');
 
 const FORK_CHECKOUT_TIMEOUT = 10000;
 const FORK_CHECKOUT_INTERVAL = 2500;
 
 async function forkOne({ owner, repositoryName }, options = { clone: false, open: false }) {
   try {
+    if (!owner || !repositoryName) {
+      throw new WrongRepositoryInformation();
+    }
+
     const { token } = await authenticate();
 
     const userDetails = await httpClient.getUserProfile(token);
