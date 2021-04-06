@@ -15,20 +15,15 @@ function bindServer(eventEmitter, callback) {
   });
 
   app.get('/callback', (req, res) => {
-    const { error, code, state } = req.query;
-
-    if (error) {
-      eventEmitter.emit('aborted', code, state);
-      return res.status(401).json('error auth');
-    }
+    const { code, state } = req.query;
 
     if (code && state) {
       eventEmitter.emit('authenticated', code, state);
-      return res.status(200).json('auth, you can close');
+      return res.sendFile(join(TEMPLATE, '/success.html'));
     }
 
     eventEmitter.emit('aborted');
-    return res.status(500).end();
+    return res.sendFile(join(TEMPLATE, '/fail.html'));
   });
 
   const server = app.listen(4243, () => {

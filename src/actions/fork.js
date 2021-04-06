@@ -46,7 +46,7 @@ async function forkMultiple(repositories) {
     }
 
     if (repositories.length === 1) {
-      await forkOne(repositories[1]);
+      await forkOne(repositories[0]);
       return;
     }
 
