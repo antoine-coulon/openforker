@@ -75,7 +75,6 @@ async function selectRepositoriesToFork(repos) {
     const repoName = chosenRepo.split('(')[0].trimRight();
     reposFullData.push(reposDataMap.get(repoName));
   });
-
   await forkEachSelectedRepository(reposFullData);
 }
 
