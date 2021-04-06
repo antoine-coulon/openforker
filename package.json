@@ -1,7 +1,7 @@
 {
   "name": "openforker",
-  "version": "1.0.1",
-  "description": "CLI / API helping developers view, chose and fork an open-source repo",
+  "version": "1.0.2",
+  "description": "CLI / API helping developers view, chose and fork a GitHub open-source repositories",
   "main": "./index.js",
   "bin": {
     "openforker": "./bin/index.js",

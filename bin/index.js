@@ -5,20 +5,18 @@ const sade = require('sade');
 const { italic } = require('kleur');
 require('make-promises-safe');
 
-const { version, name } = require('../package.json');
-// eslint-disable-next-line no-unused-vars
+const { version } = require('../package.json');
 const { forkOne } = require('../src/actions/fork');
 const { cliDefaultFont, divWrapper } = require('../src/util/ui');
 const exploreTrends = require('../src/actions/trends');
 
-const program = sade(name).version(version);
+const program = sade('forker').version(version);
 
 divWrapper(`${cliDefaultFont('Forker executed from : ')} ${italic().yellow(process.cwd())}`);
 
-
 program
   .command('trends')
-  .describe('List top GitHub trends')
+  .describe('List top GitHub trends and choose ones to fork')
   .option('-l, --language', 'Select the trends language', false)
   .option('-p, --period', 'Select the period', false)
   .action(trendsTask);
