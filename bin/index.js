@@ -15,6 +15,7 @@ const program = sade(name).version(version);
 
 divWrapper(`${cliDefaultFont('Forker executed from : ')} ${italic().yellow(process.cwd())}`);
 
+
 program
   .command('trends')
   .describe('List top GitHub trends')
