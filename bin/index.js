@@ -7,7 +7,7 @@ require('make-promises-safe');
 
 const { version } = require('../package.json');
 const { forkOne } = require('../src/actions/fork');
-const { cliDefaultFont, divWrapper, cliErrorFont } = require('../src/util/ui');
+const { cliDefaultFont, divWrapper } = require('../src/util/ui');
 const exploreTrends = require('../src/actions/trends');
 
 const program = sade('forker').version(version);
