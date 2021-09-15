@@ -29,8 +29,9 @@ program
   .action(forkTask);
 
 async function forkTask(repositoryInformation, options) {
+  console.log(repositoryInformation);
   const [owner, repositoryName] = repositoryInformation.split('/');
-  await forkOne({ owner, repositoryName }, options);
+  await forkOne({ author: owner, name: repositoryName }, options);
 }
 
 async function trendsTask(options) {

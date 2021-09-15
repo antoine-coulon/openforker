@@ -24,7 +24,9 @@ const WrongRepositoryInformation = require('../errors/wrongRepositoryInformation
 const FORK_CHECKOUT_TIMEOUT = 10000;
 const FORK_CHECKOUT_INTERVAL = 2500;
 
-async function forkOne({ owner, repositoryName }, options = { clone: false, open: false }) {
+async function forkOne(
+  { author: owner, name: repositoryName }, options = { clone: false, open: false },
+) {
   try {
     if (!owner || !repositoryName) {
       throw new WrongRepositoryInformation();
