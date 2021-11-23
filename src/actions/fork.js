@@ -25,7 +25,7 @@ const FORK_CHECKOUT_TIMEOUT = 10000;
 const FORK_CHECKOUT_INTERVAL = 2500;
 
 async function forkOne(
-  { author: owner, name: repositoryName }, options = { clone: false, open: false },
+  { author: owner, name: repositoryName }, options = { remoteOnly: false, open: false },
 ) {
   try {
     if (!owner || !repositoryName) {
@@ -110,11 +110,11 @@ function startFork({
 }
 
 async function continueActionsWithForkedRepository(repository, options) {
-  const { clone, open } = options;
+  const { remoteOnly, open } = options;
 
   divWrapper(`${cliDefaultFont('Successfully created fork : ')} ${cliSuccessFont(repository.html_url)}`);
 
-  if (clone) {
+  if (!remoteOnly) {
     cloneRepository(repository);
   }
 
