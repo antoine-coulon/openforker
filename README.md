@@ -34,7 +34,7 @@ $ forker trends --language --period
 * directly fork a repository by knowing author & repository name, then clones it locally and open a browser tab
 on the forked repository
 ```console
-$ forker use discordjs discord.js --clone
+$ forker use discordjs/discord.js --clone
 ```
 
 ### API Mode
