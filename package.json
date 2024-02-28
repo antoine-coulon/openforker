@@ -27,7 +27,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antoine-coulon/openforker.git"
+    "url": "git+https://github.com/satrianak/openforker/openforker.git"
   },
   "publishConfig": {
     "access": "public"
@@ -41,9 +41,9 @@
   "author": "Antoine Coulon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/antoine-coulon/openforker/issues"
+    "url": "https://github.com/satrianak/openforker/issues"
   },
-  "homepage": "https://github.com/antoine-coulon/openforker#readme",
+  "homepage": "https://github.com/satrianak/openforker#readme",
   "devDependencies": {
     "eslint": "^7.22.0",
     "eslint-config-airbnb-base": "^14.2.1",
